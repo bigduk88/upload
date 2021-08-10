@@ -3,6 +3,7 @@ package hello.upload.file;
 import hello.upload.domain.UploadFile;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@ComponentScan
+@Component
 public class FileStore {
 
     @Value("${file.dir}")
@@ -52,6 +53,5 @@ public class FileStore {
         int pos = originalFilename.lastIndexOf(".");
         return originalFilename.substring(pos + 1);
     }
-
 
 }

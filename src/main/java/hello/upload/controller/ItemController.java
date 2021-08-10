@@ -6,7 +6,6 @@ import hello.upload.domain.UploadFile;
 import hello.upload.file.FileStore;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.buf.UriUtil;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -35,15 +34,16 @@ public class ItemController {
         return "item-form";
     }
 
-    @PostMapping("/item/new")
+    @PostMapping("/items/new")
     public String saveItem(@ModelAttribute ItemForm form, RedirectAttributes redirectAttributes) throws IOException {
-        UploadFile attacFile = fileStore.storeFile(form.getAttachFile());
+
+        UploadFile attachFile = fileStore.storeFile(form.getAttachFile());
         List<UploadFile> storeImageFiles = fileStore.storeFiles(form.getImageFiles());
 
         //데이터 베이스에 저장
         Item item = new Item();
         item.setItemName(form.getItemName());
-        item.setAttachFile(attacFile);
+        item.setAttachFile(attachFile);
         item.setImageFiles(storeImageFiles);
         itemRepository.save(item);
 

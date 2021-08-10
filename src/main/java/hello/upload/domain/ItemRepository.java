@@ -9,10 +9,10 @@ import java.util.Map;
 public class ItemRepository {
 
     private final Map<Long, Item> store = new HashMap<>();
-    private long sequnce = 0L;
+    private long sequence = 0L;
 
     public Item save(Item item) {
-        item.setId(++sequnce);
+        item.setId(++sequence);
         store.put(item.getId(), item);
         return item;
     }
